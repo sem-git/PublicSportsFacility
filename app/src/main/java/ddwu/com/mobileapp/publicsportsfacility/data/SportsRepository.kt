@@ -1,4 +1,7 @@
-package ddwu.com.mobileapp.publicsportsfacility
+package ddwu.com.mobileapp.publicsportsfacility.data
+
+import ddwu.com.mobileapp.publicsportsfacility.data.network.FacilityService
+import ddwu.com.mobileapp.publicsportsfacility.data.network.Facility
 
 class SportsRepository(private val service: FacilityService) {
 

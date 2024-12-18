@@ -1,9 +1,10 @@
-package ddwu.com.mobileapp.publicsportsfacility
+package ddwu.com.mobileapp.publicsportsfacility.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ddwu.com.mobileapp.publicsportsfacility.data.network.Facility
 import ddwu.com.mobileapp.publicsportsfacility.databinding.ListItemBinding
 
 class FacilityAdapter : RecyclerView.Adapter<FacilityAdapter.FacilityHolder>() {

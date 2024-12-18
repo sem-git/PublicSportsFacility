@@ -1,4 +1,4 @@
-package ddwu.com.mobileapp.publicsportsfacility
+package ddwu.com.mobileapp.publicsportsfacility.data.network
 
 import retrofit2.http.GET
 import retrofit2.http.Path

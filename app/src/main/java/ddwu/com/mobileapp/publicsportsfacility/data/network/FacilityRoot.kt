@@ -1,4 +1,4 @@
-package ddwu.com.mobileapp.publicsportsfacility
+package ddwu.com.mobileapp.publicsportsfacility.data.network
 
 
 data class FacilityRoot(

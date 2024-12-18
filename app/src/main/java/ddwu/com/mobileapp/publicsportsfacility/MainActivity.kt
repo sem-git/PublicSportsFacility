@@ -7,6 +7,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import ddwu.com.mobileapp.publicsportsfacility.databinding.ActivityMainBinding
+import ddwu.com.mobileapp.publicsportsfacility.ui.FacilityAdapter
+import ddwu.com.mobileapp.publicsportsfacility.ui.FacilityViewModel
+import ddwu.com.mobileapp.publicsportsfacility.ui.FacilityViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 

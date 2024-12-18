@@ -1,8 +1,7 @@
-package ddwu.com.mobileapp.publicsportsfacility
+package ddwu.com.mobileapp.publicsportsfacility.data.network
 
 import android.content.Context
 import android.util.Log
-import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
