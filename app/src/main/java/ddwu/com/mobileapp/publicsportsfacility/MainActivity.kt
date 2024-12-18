@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         facilityViewModel.loadFacilities(
-            apiKey = "",
+            apiKey = BuildConfig.API_KEY,
             startIndex = 1,
             endIndex = 20
         )
