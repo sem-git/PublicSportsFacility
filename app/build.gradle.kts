@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "ddwu.com.mobileapp.publicsportsfacility"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ddwu.com.mobileapp.publicsportsfacility"
@@ -48,4 +48,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Lifecycle components
+    val lifecycle_version = "2.8.5"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
+
+    // retrofit
+    val retrofit_version = "2.11.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
 }
