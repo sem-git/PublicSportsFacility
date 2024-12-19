@@ -46,6 +46,8 @@ class DetailActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(detailBinding.root)
 
+        supportActionBar?.hide()
+
         facility = intent.getSerializableExtra("facility") as Facility
 
         Glide.with(this)
