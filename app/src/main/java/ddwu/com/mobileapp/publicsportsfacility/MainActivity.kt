@@ -1,8 +1,10 @@
 package ddwu.com.mobileapp.publicsportsfacility
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +58,15 @@ class MainActivity : AppCompatActivity() {
             adapter.facilities = facilities
             adapter.notifyDataSetChanged()
         }
+
+        adapter.setOnItemClickListener(object : FacilityAdapter.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                val url = adapter.facilities?.get(position)?.IMGURL
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                intent.putExtra("url", url)
+                startActivity(intent)
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

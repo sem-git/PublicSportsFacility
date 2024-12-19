@@ -36,6 +36,10 @@ class FacilityAdapter : RecyclerView.Adapter<FacilityAdapter.FacilityHolder>() {
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .error(android.R.drawable.ic_dialog_alert)
                 .into(holder.itemBinding.ivPlace)
+
+            holder.itemBinding.clItem.setOnClickListener{
+                clickListener?.onItemClick(it, position)
+            }
         }
     }
 
