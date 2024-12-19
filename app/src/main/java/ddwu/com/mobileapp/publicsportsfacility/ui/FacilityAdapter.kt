@@ -23,9 +23,12 @@ class FacilityAdapter : RecyclerView.Adapter<FacilityAdapter.FacilityHolder>() {
     override fun onBindViewHolder(holder: FacilityHolder, position: Int) {
         val facility = facilities?.get(position)
         facility?.let {
-            holder.itemBinding.tvFacilityName.text = it.SVCNM
-            holder.itemBinding.tvFacilityLocation.text = it.PLACENM
-            holder.itemBinding.tvFacilityStatus.text = it.SVCSTATNM
+            holder.itemBinding.tvSubClass.text = it.MINCLASSNM
+            holder.itemBinding.tvServiceStatus.text = it.SVCSTATNM
+            holder.itemBinding.tvPlaceName.text = it.PLACENM
+            holder.itemBinding.tvServiceName.text = it.SVCNM
+            holder.itemBinding.tvAreaName.text = it.AREANM
+            holder.itemBinding.tvHours.text = "${it.V_MIN} - ${it.V_MAX}"
         }
     }
 

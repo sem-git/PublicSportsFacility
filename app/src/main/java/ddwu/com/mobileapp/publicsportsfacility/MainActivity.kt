@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         sdViewModel.loadFacilities(
             apiKey = BuildConfig.API_KEY,
             startIndex = 1,
-            endIndex = 20
+            endIndex = 30
         )
 
         sdViewModel.facilities.observe(this) { facilities ->
