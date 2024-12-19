@@ -72,7 +72,9 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (!newText.isNullOrBlank()) {
                     val filteredList = facilityViewModel.facilities.value?.filter { facility ->
-                        facility.PLACENM.contains(newText, ignoreCase = true)
+                        facility.MINCLASSNM.contains(newText, ignoreCase = true) ||
+                                facility.PLACENM.contains(newText, ignoreCase = true) ||
+                                facility.SVCNM.contains(newText, ignoreCase = true)
                     }.orEmpty()
 
                     adapter.facilities = filteredList
