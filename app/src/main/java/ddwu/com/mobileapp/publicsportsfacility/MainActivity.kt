@@ -2,9 +2,11 @@ package ddwu.com.mobileapp.publicsportsfacility
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import ddwu.com.mobileapp.publicsportsfacility.databinding.ActivityMainBinding
 import ddwu.com.mobileapp.publicsportsfacility.ui.FacilityAdapter
@@ -17,14 +19,20 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private lateinit var adapter: FacilityAdapter
+    private val facilityViewModel: FacilityViewModel by viewModels {
+        FacilityViewModelFactory((application as FacilityApplication).fRepository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        val adapter = FacilityAdapter()
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        adapter = FacilityAdapter()
+        val layoutManager = LinearLayoutManager(this).apply {
+            orientation = LinearLayoutManager.VERTICAL
+        }
 
         binding.rvFacilities.layoutManager = layoutManager
         binding.rvFacilities.adapter = adapter
@@ -49,5 +57,35 @@ class MainActivity : AppCompatActivity() {
             adapter.facilities = facilities
             adapter.notifyDataSetChanged()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        val searchItem = menu?.findItem(R.id.searchBtn)
+        val searchView = searchItem?.actionView as SearchView
+
+        searchView.setQueryHint("검색어를 입력하세요")
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (!newText.isNullOrBlank()) {
+                    val filteredList = facilityViewModel.facilities.value?.filter { facility ->
+                        facility.PLACENM.contains(newText, ignoreCase = true)
+                    }.orEmpty()
+
+                    adapter.facilities = filteredList
+                    adapter.notifyDataSetChanged()
+                } else {
+                    adapter.facilities = facilityViewModel.facilities.value.orEmpty()
+                    adapter.notifyDataSetChanged()
+                }
+                return true
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
     }
 }
