@@ -7,12 +7,103 @@
     tools:context=".DetailActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="338dp"
-        android:layout_height="202dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/ivPlaceDetail"
+        android:layout_width="330dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/tvPlaceNameDetail"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:text="시설명"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivPlaceDetail" />
+
+    <TextView
+        android:id="@+id/tvServiceNameDetail"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="서비스명"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlaceNameDetail" />
+
+    <TextView
+        android:id="@+id/tvSubClassDetail"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="소분류명"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvServiceNameDetail" />
+
+    <TextView
+        android:id="@+id/tvAreaNameDetail"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="위치"
+        app:layout_constraintStart_toEndOf="@+id/tvHoursDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvServiceStatusDetail" />
+
+    <TextView
+        android:id="@+id/tvServiceStatusDetail"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:text="상태"
+        app:layout_constraintStart_toEndOf="@+id/tvSubClassDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvServiceNameDetail" />
+
+    <TextView
+        android:id="@+id/tvPayDetail"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:text="이용 (결제)"
+        app:layout_constraintStart_toEndOf="@+id/tvTelNumberDetail"
+        app:layout_constraintTop_toBottomOf="@+id/tvAreaNameDetail" />
+
+    <TextView
+        android:id="@+id/tvHoursDetail"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="이용시간"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubClassDetail" />
+
+    <TextView
+        android:id="@+id/tvTelNumberDetail"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="24dp"
+        android:text="전화번호"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHoursDetail" />
+
+    <TextView
+        android:id="@+id/tvServiceURLDetail"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:text="예약 바로가기"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTelNumberDetail" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,9 +61,9 @@ class MainActivity : AppCompatActivity() {
 
         adapter.setOnItemClickListener(object : FacilityAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
-                val url = adapter.facilities?.get(position)?.IMGURL
+                val facility = adapter.facilities?.get(position)
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                intent.putExtra("url", url)
+                intent.putExtra("facility", facility)
                 startActivity(intent)
             }
         })

@@ -1,5 +1,7 @@
 package ddwu.com.mobileapp.publicsportsfacility.data.network
 
+import java.io.Serializable
+
 
 data class FacilityRoot(
     val ListPublicReservationSport: ListPublicReservationSport
@@ -31,4 +33,4 @@ data class Facility(
     val TELNO: String?,
     val V_MIN: String?,
     val V_MAX: String?,
-)
+) : Serializable
