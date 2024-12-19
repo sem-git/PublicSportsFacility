@@ -6,6 +6,12 @@ import android.text.method.LinkMovementMethod
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import ddwu.com.mobileapp.publicsportsfacility.data.network.Facility
 import ddwu.com.mobileapp.publicsportsfacility.databinding.ActivityDetailBinding
 
@@ -16,6 +22,24 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private lateinit var facility: Facility
+    private lateinit var googleMap: GoogleMap
+
+    private val mapReadyCallback = object : OnMapReadyCallback {
+        override fun onMapReady(p0: GoogleMap) {
+            googleMap = p0
+
+            val latitude = facility.Y.toDouble()
+            val longitude = facility.X.toDouble()
+
+            val location = LatLng(latitude, longitude)
+
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18f))
+            googleMap.addMarker(MarkerOptions().position(location).title(facility.PLACENM))
+            googleMap.setOnMapClickListener { latLng ->
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +47,12 @@ class DetailActivity : AppCompatActivity() {
         setContentView(detailBinding.root)
 
         facility = intent.getSerializableExtra("facility") as Facility
+
+        Glide.with(this)
+            .load(facility.IMGURL)
+            .placeholder(android.R.drawable.ic_menu_gallery)
+            .error(android.R.drawable.ic_dialog_alert)
+            .into(detailBinding.ivPlaceDetail)
 
         detailBinding.tvPlaceNameDetail.text = "시설명 : ${facility.PLACENM}"
         detailBinding.tvServiceNameDetail.text = "서비스명 : ${facility.SVCNM}"
@@ -33,16 +63,12 @@ class DetailActivity : AppCompatActivity() {
         detailBinding.tvTelNumberDetail.text = "전화번호 : ${facility.TELNO}"
         detailBinding.tvPayDetail.text = "이용 : ${facility.PAYATNM}"
 
-
         detailBinding.tvServiceURLDetail.text =
             Html.fromHtml("예약 바로가기 <br><a href=\"${facility.SVCURL}\">${facility.SVCURL}</a>")
         detailBinding.tvServiceURLDetail.movementMethod = LinkMovementMethod.getInstance()
 
-        Glide.with(this)
-            .load(facility.IMGURL)
-            .placeholder(android.R.drawable.ic_menu_gallery)
-            .error(android.R.drawable.ic_dialog_alert)
-            .into(detailBinding.ivPlaceDetail)
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
+        mapFragment.getMapAsync(mapReadyCallback)
     }
 }
 
