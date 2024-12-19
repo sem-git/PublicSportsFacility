@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ddwu.com.mobileapp.publicsportsfacility.data.SDRepository
 import ddwu.com.mobileapp.publicsportsfacility.data.network.Facility
+
 import kotlinx.coroutines.launch
 
 class SDViewModel(private val sdRepository: SDRepository) : ViewModel() {

@@ -1,6 +1,9 @@
 package ddwu.com.mobileapp.publicsportsfacility.data.network
 
 import android.content.Context
+import android.graphics.Bitmap
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.FutureTarget
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

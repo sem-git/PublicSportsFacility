@@ -63,4 +63,7 @@ dependencies {
     val retrofit_version = "2.11.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

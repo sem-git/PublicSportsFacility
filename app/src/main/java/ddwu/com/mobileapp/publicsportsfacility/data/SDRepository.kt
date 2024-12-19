@@ -1,5 +1,6 @@
 package ddwu.com.mobileapp.publicsportsfacility.data
 
+import android.graphics.Bitmap
 import ddwu.com.mobileapp.publicsportsfacility.data.network.SDService
 import ddwu.com.mobileapp.publicsportsfacility.data.network.Facility
 

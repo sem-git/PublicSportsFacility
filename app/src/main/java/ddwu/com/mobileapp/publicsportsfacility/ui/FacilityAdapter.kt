@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ddwu.com.mobileapp.publicsportsfacility.data.network.Facility
 import ddwu.com.mobileapp.publicsportsfacility.databinding.ListItemBinding
 
@@ -29,6 +30,12 @@ class FacilityAdapter : RecyclerView.Adapter<FacilityAdapter.FacilityHolder>() {
             holder.itemBinding.tvServiceName.text = it.SVCNM
             holder.itemBinding.tvAreaName.text = it.AREANM
             holder.itemBinding.tvHours.text = "${it.V_MIN} - ${it.V_MAX}"
+
+            Glide.with(holder.itemBinding.root.context)
+                .load(it.IMGURL)
+                .placeholder(android.R.drawable.ic_menu_gallery)
+                .error(android.R.drawable.ic_dialog_alert)
+                .into(holder.itemBinding.ivPlace)
         }
     }
 
