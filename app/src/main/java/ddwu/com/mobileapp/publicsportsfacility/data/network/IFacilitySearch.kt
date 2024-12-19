@@ -3,7 +3,7 @@ package ddwu.com.mobileapp.publicsportsfacility.data.network
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ISportsAPI {
+interface IFacilitySearch {
 
     @GET("{apiKey}/{type}/{service}/{startIndex}/{endIndex}")
     suspend fun getFacilities(

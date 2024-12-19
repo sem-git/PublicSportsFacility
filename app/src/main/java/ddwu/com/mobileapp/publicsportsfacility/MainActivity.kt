@@ -10,8 +10,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import ddwu.com.mobileapp.publicsportsfacility.databinding.ActivityMainBinding
 import ddwu.com.mobileapp.publicsportsfacility.ui.FacilityAdapter
-import ddwu.com.mobileapp.publicsportsfacility.ui.FacilityViewModel
-import ddwu.com.mobileapp.publicsportsfacility.ui.FacilityViewModelFactory
+import ddwu.com.mobileapp.publicsportsfacility.ui.SDViewModel
+import ddwu.com.mobileapp.publicsportsfacility.ui.SDViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var adapter: FacilityAdapter
-    private val facilityViewModel: FacilityViewModel by viewModels {
-        FacilityViewModelFactory((application as FacilityApplication).fRepository)
+    private val facilityViewModel: SDViewModel by viewModels {
+        SDViewModelFactory((application as SDApplication).sdRepository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,23 +37,22 @@ class MainActivity : AppCompatActivity() {
         binding.rvFacilities.layoutManager = layoutManager
         binding.rvFacilities.adapter = adapter
 
-        val facilityViewModel: FacilityViewModel by viewModels {
-            FacilityViewModelFactory((application as FacilityApplication).fRepository)
+        val sdViewModel: SDViewModel by viewModels {
+            SDViewModelFactory((application as SDApplication).sdRepository)
         }
 
-        facilityViewModel.facilities.observe(this) { facilities ->
+        sdViewModel.facilities.observe(this) { facilities ->
             adapter.facilities = facilities
             adapter.notifyDataSetChanged()
         }
 
-        facilityViewModel.loadFacilities(
+        sdViewModel.loadFacilities(
             apiKey = BuildConfig.API_KEY,
             startIndex = 1,
             endIndex = 20
         )
 
-        facilityViewModel.facilities.observe(this) { facilities ->
-            Log.d("MainActivity", "Received facilities: ${facilities.size} items")
+        sdViewModel.facilities.observe(this) { facilities ->
             adapter.facilities = facilities
             adapter.notifyDataSetChanged()
         }
@@ -64,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         val searchItem = menu?.findItem(R.id.searchBtn)
         val searchView = searchItem?.actionView as SearchView
 
-        searchView.setQueryHint("검색어를 입력하세요")
+        searchView.setQueryHint("검색어를 입력하세요.")
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false

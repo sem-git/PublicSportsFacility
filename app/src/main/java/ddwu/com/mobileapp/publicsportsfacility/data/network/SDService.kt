@@ -1,12 +1,11 @@
 package ddwu.com.mobileapp.publicsportsfacility.data.network
 
 import android.content.Context
-import android.util.Log
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class FacilityService(val context: Context) {
-    private val service: ISportsAPI
+class SDService(val context: Context) {
+    private val service: IFacilitySearch
 
     init {
         val retrofit = Retrofit.Builder()
@@ -14,7 +13,7 @@ class FacilityService(val context: Context) {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        service = retrofit.create(ISportsAPI::class.java)
+        service = retrofit.create(IFacilitySearch::class.java)
     }
 
     suspend fun getFacilities(
@@ -29,7 +28,6 @@ class FacilityService(val context: Context) {
             startIndex,
             endIndex
         )
-        Log.d("FacilityService", "API Response: ${facilityRoot.ListPublicReservationSport.row}")
         return facilityRoot.ListPublicReservationSport.row
     }
 }

@@ -17,8 +17,7 @@ data class Result(
 )
 
 data class Facility(
-    val SVCID: String,
-    val MAXCLASSNM: String,
+    val serviceID: String,
     val MINCLASSNM: String,
     val SVCSTATNM: String,
     val SVCNM: String,
@@ -27,15 +26,9 @@ data class Facility(
     val SVCURL: String,
     val X: String,
     val Y: String,
-    val SVCOPNBGNDT: String?,
-    val SVCOPNENDDT: String?,
-    val RCPTBGNDT: String?,
-    val RCPTENDDT: String?,
     val AREANM: String?,
     val IMGURL: String?,
     val TELNO: String?,
     val V_MIN: String?,
     val V_MAX: String?,
-    val REVSTDDAYNM: String?,
-    val REVSTDDAY: String?
 )

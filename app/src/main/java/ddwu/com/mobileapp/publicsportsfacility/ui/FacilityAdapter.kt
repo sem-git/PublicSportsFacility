@@ -8,16 +8,15 @@ import ddwu.com.mobileapp.publicsportsfacility.data.network.Facility
 import ddwu.com.mobileapp.publicsportsfacility.databinding.ListItemBinding
 
 class FacilityAdapter : RecyclerView.Adapter<FacilityAdapter.FacilityHolder>() {
-
     var facilities: List<Facility>? = null
 
-    override  fun getItemCount(): Int {
+    override fun getItemCount(): Int {
         return facilities?.size ?: 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacilityHolder {
-        val itemBinding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
+        val itemBinding =
+            ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FacilityHolder(itemBinding)
     }
 
@@ -30,7 +29,8 @@ class FacilityAdapter : RecyclerView.Adapter<FacilityAdapter.FacilityHolder>() {
         }
     }
 
-    class FacilityHolder(val itemBinding: ListItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
+    class FacilityHolder(val itemBinding: ListItemBinding) :
+        RecyclerView.ViewHolder(itemBinding.root)
 
     interface OnItemClickListener {
         fun onItemClick(view: View, position: Int)
