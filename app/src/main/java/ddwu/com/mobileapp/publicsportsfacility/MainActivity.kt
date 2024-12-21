@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         val searchItem = menu?.findItem(R.id.searchBtn)
         val searchView = searchItem?.actionView as SearchView
 
-        searchView.setQueryHint("검색어를 입력하세요.")
+        searchView.setQueryHint("종목(시설명, 서비스명) 입력")
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
