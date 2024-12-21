@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         sdViewModel.loadFacilities(
             apiKey = BuildConfig.API_KEY,
             startIndex = 1,
-            endIndex = 100
+            endIndex = 500
         )
 
         adapter.setOnItemClickListener(object : FacilityAdapter.OnItemClickListener {
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
-        val searchItem = menu?.findItem(R.id.searchBtn)
+        val searchItem = menu?.findItem(R.id.btnSearch)
         val searchView = searchItem?.actionView as SearchView
 
         searchView.setQueryHint("종목(시설명, 서비스명) 입력")
@@ -96,12 +96,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val builder = AlertDialog.Builder(this@MainActivity)
         when (item.itemId) {
-            R.id.favoritesBtn -> {
+            R.id.btnFavorites -> {
                 val favoriteIntent = Intent(this, FavoritesActivity::class.java)
                 startActivity(favoriteIntent)
             }
 
-            R.id.finishBtn -> {
+            R.id.btnFinish -> {
                 builder.setTitle("앱 종료")
                     .setMessage("앱을 종료하시겠습니까?")
                     .setCancelable(false)

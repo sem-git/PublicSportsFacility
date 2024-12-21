@@ -57,7 +57,7 @@ class FavoritesActivity : AppCompatActivity() {
         sdViewModel.loadFacilities(
             apiKey = BuildConfig.API_KEY,
             startIndex = 1,
-            endIndex = 100
+            endIndex = 300
         )
 
         adapter.setOnItemClickListener(object : FacilityAdapter.OnItemClickListener {

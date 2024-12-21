@@ -1,10 +1,12 @@
 package ddwu.com.mobileapp.publicsportsfacility
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
@@ -108,12 +110,36 @@ class DetailActivity : AppCompatActivity() {
         mapFragment.getMapAsync(mapReadyCallback)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail, menu)
+        val shareItem = menu?.findItem(R.id.btnShare)
+
+        shareItem?.setOnMenuItemClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+
+            val content = "시설명: ${facility.PLACENM}\n" +
+                    "서비스명: ${facility.SVCNM}\n" +
+                    "분류: ${facility.MINCLASSNM}\n" +
+                    "이용시간 : ${facility.V_MIN} - ${facility.V_MAX}\n" +
+                    "위치: ${facility.AREANM}\n" +
+                    "예약 바로가기: ${facility.SVCURL}"
+            intent.putExtra(Intent.EXTRA_TEXT, content)
+
+            startActivity(Intent.createChooser(intent, "친구에게 공유하기"))
+            true
+        }
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
