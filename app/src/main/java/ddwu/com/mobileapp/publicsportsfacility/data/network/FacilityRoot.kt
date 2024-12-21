@@ -19,7 +19,7 @@ data class Result(
 )
 
 data class Facility(
-    val serviceID: String,
+    val SVCID: String,
     val MINCLASSNM: String,
     val SVCSTATNM: String,
     val SVCNM: String,

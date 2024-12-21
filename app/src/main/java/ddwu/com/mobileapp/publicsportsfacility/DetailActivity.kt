@@ -1,8 +1,11 @@
 package ddwu.com.mobileapp.publicsportsfacility
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -23,6 +26,9 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var facility: Facility
     private lateinit var googleMap: GoogleMap
+
+    private lateinit var sharedPreferences: SharedPreferences
+    private var isHeartSelected = false
 
     private val mapReadyCallback = object : OnMapReadyCallback {
         override fun onMapReady(p0: GoogleMap) {
@@ -48,6 +54,29 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        sharedPreferences = getSharedPreferences("HeartPreferences", Context.MODE_PRIVATE)
+
+        val btnHeart: ImageButton = findViewById(R.id.heart)
+
+        facility = intent.getSerializableExtra("facility") as Facility
+        isHeartSelected = sharedPreferences.contains(facility.SVCID)
+        if (isHeartSelected) {
+            btnHeart.setImageResource(R.mipmap.heart_fill)
+        } else {
+            btnHeart.setImageResource(R.mipmap.heart)
+        }
+
+        btnHeart.setOnClickListener {
+            isHeartSelected = !isHeartSelected
+            if (isHeartSelected) {
+                btnHeart.setImageResource(R.mipmap.heart_fill)
+                sharedPreferences.edit().putBoolean(facility.SVCID, true).apply()
+            } else {
+                btnHeart.setImageResource(R.mipmap.heart)
+                sharedPreferences.edit().remove(facility.SVCID).apply()
+            }
+        }
+
         facility = intent.getSerializableExtra("facility") as Facility
 
         Glide.with(this)
@@ -69,7 +98,8 @@ class DetailActivity : AppCompatActivity() {
             Html.fromHtml("예약 바로가기 <br><a href=\"${facility.SVCURL}\">${facility.SVCURL}</a>")
         detailBinding.tvServiceURLDetail.movementMethod = LinkMovementMethod.getInstance()
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
+        val mapFragment =
+            supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(mapReadyCallback)
     }
 }

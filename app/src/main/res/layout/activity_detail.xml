@@ -26,7 +26,7 @@
 
             <TextView
                 android:id="@+id/tvPlaceNameDetail"
-                android:layout_width="320dp"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="28dp"
@@ -120,13 +120,26 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="330dp"
                 android:layout_height="280dp"
-                android:layout_marginStart="40dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvServiceURLDetail"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/heart"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="23dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                app:layout_constraintStart_toEndOf="@+id/tvPlaceNameDetail"
+                app:layout_constraintTop_toBottomOf="@+id/ivPlaceDetail"
+                app:srcCompat="@mipmap/heart" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </android.widget.ScrollView>
