@@ -1,0 +1,63 @@
+package ddwu.com.mobileapp.publicsportsfacility
+
+import android.content.Context
+import android.content.SharedPreferences
+import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import ddwu.com.mobileapp.publicsportsfacility.databinding.ActivityFavoritesBinding
+import ddwu.com.mobileapp.publicsportsfacility.ui.FacilityAdapter
+import ddwu.com.mobileapp.publicsportsfacility.ui.SDViewModel
+import ddwu.com.mobileapp.publicsportsfacility.ui.SDViewModelFactory
+
+class FavoritesActivity : AppCompatActivity() {
+
+    val favoriteBinding by lazy {
+        ActivityFavoritesBinding.inflate(layoutInflater)
+    }
+
+    private lateinit var adapter: FacilityAdapter
+    private val sdViewModel: SDViewModel by viewModels {
+        SDViewModelFactory((application as SDApplication).sdRepository)
+    }
+
+    private lateinit var sharedPreferences: SharedPreferences
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(favoriteBinding.root)
+        adapter = FacilityAdapter()
+        sharedPreferences = getSharedPreferences("HeartPreferences", Context.MODE_PRIVATE)
+
+        val layoutManager = LinearLayoutManager(this).apply {
+            orientation = LinearLayoutManager.VERTICAL
+        }
+
+        favoriteBinding.rvFavorites.layoutManager = layoutManager
+        favoriteBinding.rvFavorites.adapter = adapter
+
+        val favoriteIds = sharedPreferences.all.keys
+
+        sdViewModel.facilities.observe(this) { facilities ->
+            adapter.facilities = facilities.filter { it.SVCID in favoriteIds }
+            adapter.notifyDataSetChanged()
+        }
+
+        sdViewModel.loadFacilities(
+            apiKey = BuildConfig.API_KEY,
+            startIndex = 1,
+            endIndex = 100
+        )
+
+        adapter.setOnItemClickListener(object : FacilityAdapter.OnItemClickListener {
+            override fun onItemClick(view: android.view.View, position: Int) {
+                val facility = adapter.facilities?.get(position)
+                val intent =
+                    android.content.Intent(this@FavoritesActivity, DetailActivity::class.java)
+                intent.putExtra("facility", facility)
+                startActivity(intent)
+            }
+        })
+    }
+}

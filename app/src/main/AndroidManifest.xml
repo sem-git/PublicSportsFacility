@@ -26,6 +26,9 @@
             android:value="AIzaSyDgNEIxHVvXI-mV5USv6x2uttlQWkpIyXQ" />
 
         <activity
+            android:name=".FavoritesActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailActivity"
             android:exported="false" />
         <activity

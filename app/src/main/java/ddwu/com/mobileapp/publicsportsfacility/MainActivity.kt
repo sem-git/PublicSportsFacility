@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,8 +52,8 @@ class MainActivity : AppCompatActivity() {
 
         sdViewModel.loadFacilities(
             apiKey = BuildConfig.API_KEY,
-            startIndex = 40,
-            endIndex = 90
+            startIndex = 1,
+            endIndex = 100
         )
 
         sdViewModel.facilities.observe(this) { facilities ->
@@ -99,5 +101,25 @@ class MainActivity : AppCompatActivity() {
         })
 
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val builder = AlertDialog.Builder(this@MainActivity)
+        when (item.itemId) {
+            R.id.favoritesBtn -> {
+                val favoriteIntent = Intent(this, FavoritesActivity::class.java)
+                startActivity(favoriteIntent)
+            }
+
+            R.id.finishBtn -> {
+                builder.setTitle("앱 종료")
+                    .setMessage("앱을 종료하시겠습니까?")
+                    .setCancelable(false)
+                    .setPositiveButton("종료") { dialogInterface, i -> finish() }
+                    .setNegativeButton("취소", null)
+                builder.show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
