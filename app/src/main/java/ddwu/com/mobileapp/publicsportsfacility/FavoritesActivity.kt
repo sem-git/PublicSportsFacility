@@ -47,12 +47,7 @@ class FavoritesActivity : AppCompatActivity() {
         favoriteBinding.rvFavorites.layoutManager = layoutManager
         favoriteBinding.rvFavorites.adapter = adapter
 
-        val favoriteIds = sharedPreferences.all.keys
-
-        sdViewModel.facilities.observe(this) { facilities ->
-            adapter.facilities = facilities.filter { it.SVCID in favoriteIds }
-            adapter.notifyDataSetChanged()
-        }
+        loadFavorites()
 
         sdViewModel.loadFacilities(
             apiKey = BuildConfig.API_KEY,
@@ -69,6 +64,20 @@ class FavoritesActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadFavorites()
+    }
+
+    private fun loadFavorites() {
+        val favoriteIds = sharedPreferences.all.keys
+
+        sdViewModel.facilities.observe(this) { facilities ->
+            adapter.facilities = facilities.filter { it.SVCID in favoriteIds }
+            adapter.notifyDataSetChanged()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
