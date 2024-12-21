@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
+import android.view.MenuItem
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -52,7 +53,11 @@ class DetailActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(detailBinding.root)
 
-        supportActionBar?.hide()
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = "상세정보"
+        }
 
         sharedPreferences = getSharedPreferences("HeartPreferences", Context.MODE_PRIVATE)
 
@@ -101,6 +106,16 @@ class DetailActivity : AppCompatActivity() {
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(mapReadyCallback)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 

@@ -3,6 +3,8 @@ package ddwu.com.mobileapp.publicsportsfacility
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.MenuItem
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +28,15 @@ class FavoritesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(favoriteBinding.root)
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = "즐겨찾기"
+        }
+
         adapter = FacilityAdapter()
         sharedPreferences = getSharedPreferences("HeartPreferences", Context.MODE_PRIVATE)
 
@@ -59,5 +69,16 @@ class FavoritesActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
