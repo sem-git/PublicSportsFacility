@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var adapter: FacilityAdapter
-    private val facilityViewModel: SDViewModel by viewModels {
+    private val sdViewModel: SDViewModel by viewModels {
         SDViewModelFactory((application as SDApplication).sdRepository)
     }
 
@@ -41,10 +41,6 @@ class MainActivity : AppCompatActivity() {
         binding.rvFacilities.layoutManager = layoutManager
         binding.rvFacilities.adapter = adapter
 
-        val sdViewModel: SDViewModel by viewModels {
-            SDViewModelFactory((application as SDApplication).sdRepository)
-        }
-
         sdViewModel.facilities.observe(this) { facilities ->
             adapter.facilities = facilities
             adapter.notifyDataSetChanged()
@@ -55,11 +51,6 @@ class MainActivity : AppCompatActivity() {
             startIndex = 1,
             endIndex = 100
         )
-
-        sdViewModel.facilities.observe(this) { facilities ->
-            adapter.facilities = facilities
-            adapter.notifyDataSetChanged()
-        }
 
         adapter.setOnItemClickListener(object : FacilityAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
@@ -84,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (!newText.isNullOrBlank()) {
-                    val filteredList = facilityViewModel.facilities.value?.filter { facility ->
+                    val filteredList = sdViewModel.facilities.value?.filter { facility ->
                         facility.MINCLASSNM.contains(newText, ignoreCase = true) ||
                                 facility.PLACENM.contains(newText, ignoreCase = true) ||
                                 facility.SVCNM.contains(newText, ignoreCase = true)
@@ -93,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                     adapter.facilities = filteredList
                     adapter.notifyDataSetChanged()
                 } else {
-                    adapter.facilities = facilityViewModel.facilities.value.orEmpty()
+                    adapter.facilities = sdViewModel.facilities.value.orEmpty()
                     adapter.notifyDataSetChanged()
                 }
                 return true
