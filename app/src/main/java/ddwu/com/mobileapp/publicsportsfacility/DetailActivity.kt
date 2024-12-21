@@ -9,6 +9,7 @@ import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -78,9 +79,11 @@ class DetailActivity : AppCompatActivity() {
             if (isHeartSelected) {
                 btnHeart.setImageResource(R.mipmap.heart_fill)
                 sharedPreferences.edit().putBoolean(facility.SVCID, true).apply()
+                Toast.makeText(this, "즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show()
             } else {
                 btnHeart.setImageResource(R.mipmap.heart)
                 sharedPreferences.edit().remove(facility.SVCID).apply()
+                Toast.makeText(this, "즐겨찾기에서 제거되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
